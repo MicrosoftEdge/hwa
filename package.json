@@ -1,0 +1,25 @@
+{
+  "name": "hwa",
+  "version": "0.0.1",
+  "description": "Hosted Web App Launcher",
+  "main": "index.js",
+  "bin": {
+    "hwa": "hwa.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alxlu/hwa.git"
+  },
+  "author": "Alex Lu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alxlu/hwa/issues"
+  },
+  "homepage": "https://github.com/alxlu/hwa#readme",
+  "dependencies": {
+    "yargs": "^3.20.0"
+  }
+}
