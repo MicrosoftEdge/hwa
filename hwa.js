@@ -9,15 +9,17 @@ var exec = require('child_process').exec;
 
 var appxmanifest = path.join(__dirname, 'AppxManifest.xml');
 
-if (argv.lh || argv.localhost) {
-  var port = argv.lh || argv.localhost;
-  updateStartPage('http://localhost:' + port);
-  registerApp(true);
-} else {
-  var startpage = argv._[0] || 'http://alx.lu/Testbed';
-  //console.log(startpage);
-  updateStartPage(startpage);
-  registerApp(false);
+function main() {
+  if (argv.lh || argv.localhost) {
+    var port = argv.lh || argv.localhost;
+    updateStartPage('http://localhost:' + port);
+    registerApp(true);
+  } else {
+    var startpage = argv._[0] || 'http://alx.lu/Testbed';
+    //console.log(startpage);
+    updateStartPage(startpage);
+    registerApp(false);
+  }
 }
 
 function updateStartPage(sp) {
@@ -42,7 +44,13 @@ function registerApp(lh) {
 
     exec(script,
     function(err, stdout, stderr) {
-      console.log('launching app');
+      console.log('launching app...');
     });
   }
+}
+
+if (!module.parent) {
+  main();
+} else {
+  module.exports = {updateStartPage: updateStartPage, registerApp: registerApp};
 }

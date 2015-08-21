@@ -14,7 +14,7 @@
     <Resource Language="en-us"/>
   </Resources>
   <Applications>
-    <Application Id="App" StartPage="http://underscorejs.org/test/">
+    <Application Id="App" StartPage="http://alx.lu/Testbed">
 
       <uap:ApplicationContentUriRules>
         <uap:Rule Type="include" Match="http://*.*" WindowsRuntimeAccess="all"/>
