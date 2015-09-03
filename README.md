@@ -7,10 +7,7 @@ Launch a Windows 10 Hosted Web App pointing to `http://example.com`. Note that t
 hwa http://example.com
 ```
 
-Launch a Windows 10 Hosted Web App pointing to `http://localhost:3000`:
-```
-hwa -lh 3000
-```
+hwa will automatically detect if you are pointing to localhost and will require admin privileges for a loopback exemption.
 
 Launch the Windows 10 Testbed App
 ```
@@ -22,12 +19,20 @@ There are two functions exported with `hwa`, `updateStartpage()` and `registerAp
 
 To update the manifest's startpage:
 ```
-require('hwa');
+var hwa = require('hwa');
 hwa.updateStartpage('http://example.com');
 ```
 
 To launch the app:
 ```
 require('hwa');
-hwa.registerApp(false);
+hwa.registerApp();
+```
+
+To specify your own manifest:
+
+```
+var path = require('path');
+var hwa = require('hwa');
+hwa.registerApp(path.resolve('path/to/manifest'));
 ```
