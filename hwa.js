@@ -35,7 +35,7 @@ function registerApp(manifest) {
     var guid = buffer.match(/\bName="(.*?)"/)[1];
     var sp = buffer.match(/\bStartPage="(.*?)"/)[1];
     var script = '';
-    if (sp.match(/https?:\/\/localhost:?\d*$/)) {
+    if (sp.match(/https?:\/\/localhost:?\d*\/?$/)) {
       script = 'powershell -noprofile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList \'-NoProfile -ExecutionPolicy Bypass -File "' +
       path.join(cwd,'AppxUtilities/StartLh.ps1') +
       ' ' + cwd + ' ' + guid + ' ' + manifestloc + '"\' -Verb Runas}";';
