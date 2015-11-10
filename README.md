@@ -25,7 +25,6 @@ hwa.updateStartpage('http://example.com');
 
 To launch the app:
 ```
-require('hwa');
 hwa.registerApp();
 ```
 
