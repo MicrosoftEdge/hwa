@@ -23,6 +23,7 @@ function main() {
 function updateStartPage(sp) {
   var buffer = fs.readFileSync(appxmanifest, 'utf8');
   buffer = buffer.replace(/(\bStartPage=")([^"])*(?=")/, '$1' + sp);
+  buffer = buffer.replace(/(\bMatch=")([^"])*(?=")/, '$1' + sp);
   fs.writeFileSync(appxmanifest, buffer);
 }
 

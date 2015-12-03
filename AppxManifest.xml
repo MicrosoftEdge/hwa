@@ -14,13 +14,16 @@
     <Resource Language="en-us"/>
   </Resources>
   <Applications>
-    <Application Id="App" StartPage="http://alx.lu/Testbed">
+    <Application Id="App" StartPage="http://localhost:3000">
 
       <uap:ApplicationContentUriRules>
+        <uap:Rule Type="include" Match="http://localhost:3000" WindowsRuntimeAccess="all" />
+        <uap:Rule Type="include" Match="http://*" WindowsRuntimeAccess="all"/>
         <uap:Rule Type="include" Match="http://*.*" WindowsRuntimeAccess="all"/>
         <uap:Rule Type="include" Match="http://*.*.*" WindowsRuntimeAccess="all"/>
         <uap:Rule Type="include" Match="http://*.*.*.*" WindowsRuntimeAccess="all"/>
         <uap:Rule Type="include" Match="http://*.*.*.*.*" WindowsRuntimeAccess="all"/>
+        <uap:Rule Type="include" Match="https://*" WindowsRuntimeAccess="all"/>
         <uap:Rule Type="include" Match="https://*.*" WindowsRuntimeAccess="all"/>
         <uap:Rule Type="include" Match="https://*.*.*" WindowsRuntimeAccess="all"/>
         <uap:Rule Type="include" Match="https://*.*.*.*" WindowsRuntimeAccess="all"/>
