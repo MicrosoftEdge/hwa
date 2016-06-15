@@ -45,9 +45,15 @@ function registerApp(manifest) {
       path.join(cwd, 'AppxUtilities/Start.ps1') +
       ' ' + cwd + ' ' + guid + ' ' + manifestloc + '"\'}";';
     }
-    exec(script,
-    function(err, stdout, stderr) {
-      console.log('launching app...');
+
+    return new Promise(function (resolve, reject) {
+      exec(script, function(err, stdout, stderr) {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(stdout);
+      });
     });
   }
 }
