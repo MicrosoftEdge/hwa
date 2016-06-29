@@ -36,9 +36,9 @@ function registerApp(manifest) {
     var sp = buffer.match(/\bStartPage="(.*?)"/)[1];
     var isLocalhost = sp.match(/https?:\/\/localhost:?\d*\/?$/); 
     
-    var script = 'powershell -noprofile -noninteractive -ExecutionPolicy Bypass -File "'
-                  + path.join(cwd, 'AppxUtilities/' + (isLocalhost ? 'StartLh.ps1' : 'Start.ps1')) + '"'
-                  + ' "' + cwd + '" "' + guid + '" "' + manifestloc + '"';
+    var script = 'powershell -noprofile -noninteractive -ExecutionPolicy Bypass -Command "'
+                  + path.join(cwd, 'AppxUtilities/' + (isLocalhost ? 'StartLh.ps1' : 'Start.ps1')) 
+                  + ' \'' + cwd + '\' \'' + guid + '\' \'' + manifestloc + '\'"';                  
     return new Promise(function (resolve, reject) {
       exec(script, function(err, stdout, stderr) {
         if (err) {
