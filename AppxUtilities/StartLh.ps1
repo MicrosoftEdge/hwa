@@ -1,3 +1,5 @@
+$ErrorActionPreference = "Stop"
+
 $cwd = $args[0]
 $guid = $args[1]
 $appxmanifest = $args[2]
