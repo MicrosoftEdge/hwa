@@ -31,23 +31,22 @@ function registerApp(manifest) {
   if (os.platform() === 'win32') {
     var manifestloc = manifest || appxmanifest;
     var cwd = path.normalize(__dirname);
-    //var guid = '122f1d07-66a9-427c-9fb4-80fa75b5d81a';
     var buffer = fs.readFileSync(manifestloc, 'utf8');
     var guid = buffer.match(/\bName="(.*?)"/)[1];
     var sp = buffer.match(/\bStartPage="(.*?)"/)[1];
-    var script = '';
-    if (sp.match(/https?:\/\/localhost:?\d*\/?$/)) {
-      script = 'powershell -noprofile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList \'-NoProfile -ExecutionPolicy Bypass -File "' +
-      path.join(cwd,'AppxUtilities/StartLh.ps1') +
-      ' ' + cwd + ' ' + guid + ' ' + manifestloc + '"\' -Verb Runas}";';
-    } else {
-      script = 'powershell -noprofile -ExecutionPolicy Bypass -Command "& {Start-Process PowerShell -ArgumentList \'-NoProfile -ExecutionPolicy Bypass -File "' +
-      path.join(cwd, 'AppxUtilities/Start.ps1') +
-      ' ' + cwd + ' ' + guid + ' ' + manifestloc + '"\'}";';
-    }
-    exec(script,
-    function(err, stdout, stderr) {
-      console.log('launching app...');
+    var isLocalhost = sp.match(/https?:\/\/localhost:?\d*\/?$/); 
+    
+    var script = 'powershell -noprofile -noninteractive -ExecutionPolicy Bypass -Command "'
+                  + path.join(cwd, 'AppxUtilities/' + (isLocalhost ? 'StartLh.ps1' : 'Start.ps1')) 
+                  + ' \'' + cwd + '\' \'' + guid + '\' \'' + manifestloc + '\'"';                  
+    return new Promise(function (resolve, reject) {
+      exec(script, function(err, stdout, stderr) {
+        if (err) {
+          return reject(err);
+        }
+
+        resolve(stdout);
+      });
     });
   }
 }
